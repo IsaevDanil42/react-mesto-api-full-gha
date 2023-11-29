@@ -1,0 +1,14 @@
+.elements__like {
+  grid-row: 2;
+  margin-top: 22px;
+  width: 22px;
+  height: 19px;
+  background: #FFF;
+  border: none;
+  background-image: url(../../../images/like.svg);
+  cursor: pointer;
+}
+
+.elements__like:hover {
+  opacity: 0.5;
+}
