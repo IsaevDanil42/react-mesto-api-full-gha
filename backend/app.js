@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -16,7 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(process.env.DB_ADDRESS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -60,6 +61,6 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${3000}`);
 });
