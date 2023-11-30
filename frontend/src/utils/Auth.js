@@ -57,4 +57,5 @@ class Auth {
   }
 }
 
-export const auth = new Auth('https://auth.nomoreparties.co');
+// export const auth = new Auth('https://auth.nomoreparties.co');
+export const auth = new Auth('http://localhost:3000');

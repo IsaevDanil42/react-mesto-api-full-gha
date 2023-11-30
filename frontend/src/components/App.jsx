@@ -51,7 +51,7 @@ export default function App() {
       auth.checkToken(jwt)
         .then((data) => {
           setLoggedIn(true);
-          setEmail(data.data.email);
+          setEmail(data.email);
           navigate('/', { replace: true });
         })
         .catch(err => console.log(err))
@@ -59,7 +59,7 @@ export default function App() {
   }, [])
 
   const handleCardLike = function (card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {

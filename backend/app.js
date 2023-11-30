@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const users = require('./routes/users');
@@ -10,6 +11,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 const NOT_FOUND_CODE = 404;
+
+app.use(cors());
 
 app.use(express.json());
 
