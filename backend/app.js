@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect(process.env.DB_ADDRESS, {
+mongoose.connect(process.env.DB_ADDRESS || 'mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -67,6 +67,6 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port ${process.env.PORT}`);
 });
