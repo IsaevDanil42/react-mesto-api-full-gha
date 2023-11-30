@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP 158.160.129.68
 
-Frontend https://...
+Frontend https://mestobydi.nomoredomainsmonster.ru
 
-Backend https://...
+Backend https://api.mestobydi.nomoredomainsmonster.ru
