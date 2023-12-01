@@ -9,9 +9,9 @@ const cards = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
-const NOT_FOUND_CODE = 404;
 
 app.use(cors());
 
@@ -33,13 +33,13 @@ app.get('/crash-test', () => {
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required(),
   }),
 }), login);
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().pattern((/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/)),
@@ -48,10 +48,8 @@ app.post('/signup', celebrate({
 
 app.use('/users', auth, users);
 app.use('/cards', auth, cards);
-app.use('*', (req, res) => {
-  res.status(NOT_FOUND_CODE).send({
-    message: 'Запрашиваемая страница не существует',
-  });
+app.use('*', auth, (req, res, next) => {
+  next(new NotFoundError('Запрашиваемая страница не существует'));
 });
 
 app.use(errorLogger);
